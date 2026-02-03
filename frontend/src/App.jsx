@@ -1,36 +1,13 @@
-import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage.jsx";
 
 function App() {
-  const [health, setHealth] = useState(null);
-  const [reviews, setReviews] = useState(null);
-
-  useEffect(() => {
-    fetch("/api/health")
-      .then((res) => res.json())
-      .then(setHealth)
-      .catch(() => setHealth({ status: "error" }));
-  }, []);
-
-  useEffect(() => {
-    fetch("/api/reviews")
-      .then((res) => res.json())
-      .then(setReviews)
-      .catch(() => setReviews([]));
-  }, []);
-
   return (
-    <main style={{ padding: "2rem", maxWidth: "40rem", margin: "0 auto" }}>
-      <h1>Movie Review App</h1>
-      <p>This is a movie review app.</p>
-      {health && (
-        <p>
-          Backend health: <strong>{health.status}</strong>
-        </p>
-      )}
-      {Array.isArray(reviews) && (
-        <p>Reviews from API: {reviews.length} (placeholder list)</p>
-      )}
-    </main>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </Router>
   );
 }
 

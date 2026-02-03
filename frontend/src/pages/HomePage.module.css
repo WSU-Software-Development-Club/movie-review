@@ -1,0 +1,50 @@
+.homePage {
+  padding: var(--spacing-lg);
+  min-height: 100vh;
+}
+
+.title {
+  font-size: var(--font-size-heading);
+  color: var(--color-text);
+  margin: 0 0 var(--spacing-lg);
+  text-align: center;
+}
+
+.posterGrid {
+  display: grid;
+  /* auto-fill creates as many columns as needed to fill the container */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--poster-min-width), 1fr)
+  );
+  gap: var(--spacing-md);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.posterCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--spacing-xs);
+}
+
+.movieTitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  margin: var(--spacing-sm) 0 0;
+  text-align: center;
+}
+
+.movieYear {
+  font-size: var(--font-size-small);
+  color: var(--color-text);
+  opacity: 0.8;
+  margin: 0;
+}
