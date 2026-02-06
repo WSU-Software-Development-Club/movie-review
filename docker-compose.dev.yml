@@ -19,12 +19,12 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - VITE_PROXY_TARGET=http://backend:3001
+      - PORT=5001
       - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=true
     volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
-      - ./frontend/index.html:/app/index.html
-      - ./frontend/vite.config.js:/app/vite.config.js
+      - ./frontend:/app
+      - /app/node_modules
     depends_on:
       - backend

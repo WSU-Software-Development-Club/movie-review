@@ -8,10 +8,8 @@ const PORT = process.env.PORT || 3001;
 app.use(cors({ origin: ["http://localhost:5001", "http://localhost"] }));
 app.use(express.json());
 
-app.use("/api/reviews", reviewsRouter);
-
-app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", timestamp: Date.now() });
+app.get("/", (req, res) => {
+  res.send("Backend active");
 });
 
 app.listen(PORT, () => {
