@@ -4,7 +4,7 @@
  * To use: Import this in App.jsx and add it above <Routes> so it shows on all pages.
  * Example: import Navbar from "./components/Navbar.jsx";
  *
- * TODO: Add your nav links below. Use <Link to="/path"> from "react-router-dom".
+ *
  */
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
@@ -23,7 +23,7 @@ const Navbar = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {/* Example: <li><Link to="/about">About</Link></li> */}
+          {/* Example: <li><Link to="/profile">Profile</Link></li> */}
         </ul>
       </div>
     </nav>

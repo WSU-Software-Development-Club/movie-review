@@ -1,5 +1,10 @@
 # Movie Review App
 
+**Guides:**
+[Contribution](guides/contribution-guide.md)
+[Backend](guides/backend-guide.md)
+[Frontend](guides/frontend-guide.md)
+
 ---
 
 ## What you need
@@ -74,15 +79,29 @@ Once the app is running:
 | **Backend (API)** | http://localhost:3001 | 3001 |
 
 - Open a browser and go to **http://localhost:5001** to use the movie review app.
-- The frontend talks to the backend automatically; you don’t need to open port 3001 in the browser unless you’re testing the API (e.g. http://localhost:3001/api/health).
+- Open **http://localhost:3001** to see the backend response
 
 ---
 
-## 6. Install Node.js (optional)
+## 6. Get a TMDB API key
 
-If you might run the app without Docker, install Node.js so you have `npm` and `node` available.
+The app uses [The Movie Database (TMDB)](https://www.themoviedb.org/) for movie data. You need a free API key.
 
-- **Download:** [https://nodejs.org](https://nodejs.org)
-- Choose the **LTS** version.
-- Run the installer and follow the prompts. Restart your terminal (or computer) if needed.
-- Check: open a terminal and run `node --version` and `npm --version`; you should see version numbers.
+1. Go to [https://www.themoviedb.org/signup](https://www.themoviedb.org/signup) and create an account.
+2. In your account settings, go to **API** in the left sidebar.
+3. Request an API key (choose "Developer" and fill in the short form).
+4. Copy your **API Key (v3 auth)**.
+5. Create a `.env` file in the `backend/` folder with: `TMDB_API_KEY="your_api_key_here"`.
+6. Restart Docker if the app is already running.
+
+---
+
+## 7. Postman (for testing the API)
+
+[Postman](https://www.postman.com/downloads/) lets you send requests to your backend API without using the frontend.
+
+- **Download:** [https://www.postman.com/downloads/](https://www.postman.com/downloads/)
+- Install and open Postman.
+- Create a new request and set the URL to `http://localhost:3001/movies` (or another backend route). Send a GET request to test.
+
+---

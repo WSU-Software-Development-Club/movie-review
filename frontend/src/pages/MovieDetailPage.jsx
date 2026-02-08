@@ -22,7 +22,6 @@ const MovieDetailPage = () => {
     return (
       <div className={styles.container}>
         <p>Movie not found.</p>
-        <Link to="/">Back to Home</Link>
       </div>
     );
   }
@@ -37,9 +36,9 @@ const MovieDetailPage = () => {
         {/* TODO: Display movie poster - posterUrl uses TMDB format: https://image.tmdb.org/t/p/w500/${movie.poster_path} */}
         <div className={styles.posterPlaceholder}>Poster</div>
         <div className={styles.info}>
-          <h2 className={styles.movieTitle}>{/* TODO: movie.title */}</h2>
-          <p className={styles.releaseDate}>{/* TODO: movie.release_date */}</p>
-          <p className={styles.overview}>{/* TODO: movie.overview */}</p>
+          <h2 className={styles.movieTitle}>{movie.title}</h2>
+          <p className={styles.releaseDate}>{movie.release_date}</p>
+          <p className={styles.overview}>{movie.overview}</p>
         </div>
       </div>
     </div>
