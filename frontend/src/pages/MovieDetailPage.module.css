@@ -1,0 +1,57 @@
+.container {
+  padding: var(--spacing-lg);
+  min-height: 100vh;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+.nav {
+  margin-bottom: var(--spacing-md);
+}
+
+.nav a {
+  color: var(--color-text);
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+}
+
+.title {
+  font-size: var(--font-size-heading);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.content {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.posterPlaceholder {
+  width: 200px;
+  aspect-ratio: 2 / 3;
+  background: var(--color-text);
+  opacity: 0.2;
+  border-radius: var(--spacing-xs);
+}
+
+.info {
+  flex: 1;
+}
+
+.movieTitle {
+  font-size: var(--font-size-base);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.releaseDate {
+  font-size: var(--font-size-small);
+  opacity: 0.8;
+  margin: 0 0 var(--spacing-md);
+}
+
+.overview {
+  margin: 0;
+}
