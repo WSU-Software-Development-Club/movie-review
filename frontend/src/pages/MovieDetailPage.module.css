@@ -1,57 +1,30 @@
-.container {
+.page {
+  flex: 1;
   padding: var(--spacing-lg);
-  min-height: 100vh;
   max-width: var(--content-max-width);
   margin: 0 auto;
+  width: 100%;
 }
 
-.nav {
-  margin-bottom: var(--spacing-md);
-}
-
-.nav a {
-  color: var(--color-text);
-}
-
-.backLink {
-  display: inline-block;
-  margin-bottom: var(--spacing-md);
-  color: var(--color-text);
+.pageHeader {
+  margin-bottom: var(--spacing-lg);
 }
 
 .title {
   font-size: var(--font-size-heading);
-  margin: 0 0 var(--spacing-lg);
+  color: var(--color-text);
+  margin: 0;
 }
 
 .content {
-  display: flex;
-  gap: var(--spacing-lg);
+  color: var(--color-text-secondary);
 }
 
-.posterPlaceholder {
-  width: 200px;
-  aspect-ratio: 2 / 3;
-  background: var(--color-text);
-  opacity: 0.2;
+.placeholder {
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: var(--spacing-lg);
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
   border-radius: var(--spacing-xs);
-}
-
-.info {
-  flex: 1;
-}
-
-.movieTitle {
-  font-size: var(--font-size-base);
-  margin: 0 0 var(--spacing-sm);
-}
-
-.releaseDate {
-  font-size: var(--font-size-small);
-  opacity: 0.8;
-  margin: 0 0 var(--spacing-md);
-}
-
-.overview {
-  margin: 0;
 }

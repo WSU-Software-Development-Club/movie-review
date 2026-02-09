@@ -1,12 +1,10 @@
-/* Navbar sits at the top of the page */
 .navbar {
-  background: var(--color-bg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--spacing-md) 0;
 }
 
 .container {
-  max-width: var(--content-max-width, 1200px);
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
   display: flex;
@@ -22,7 +20,7 @@
 }
 
 .logo:hover {
-  color: var(--color-primary);
+  color: var(--color-accent);
 }
 
 .links {
@@ -34,10 +32,10 @@
 }
 
 .links a {
-  color: var(--color-text);
+  color: var(--color-text-secondary);
   text-decoration: none;
 }
 
 .links a:hover {
-  color: var(--color-primary);
+  color: var(--color-accent);
 }

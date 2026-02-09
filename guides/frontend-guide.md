@@ -75,14 +75,14 @@ const MovieCard = ({ movie }) => {
 
 ### JSX when writing logic
 
-| JSX | What it does |
-|-----|--------------|
-| `{movie.title}` | Insert a variable |
+| JSX                                                | What it does                          |
+| -------------------------------------------------- | ------------------------------------- |
+| `{movie.title}`                                    | Insert a variable                     |
 | `{movies.map(m => <Card key={m.id} movie={m} />)}` | Loop and render; `key` must be unique |
-| `{loading && <p>Loading...</p>}` | Show only if `loading` is true |
-| `{error ? <p>Error</p> : <p>OK</p>}` | Ternary: show one or the other |
-| `className={styles.card}` | Use `className`, not `class` |
-| `onClick={() => setCount(c => c + 1)}` | Event handler; wrap in arrow function |
+| `{loading && <p>Loading...</p>}`                   | Show only if `loading` is true        |
+| `{error ? <p>Error</p> : <p>OK</p>}`               | Ternary: show one or the other        |
+| `className={styles.card}`                          | Use `className`, not `class`          |
+| `onClick={() => setCount(c => c + 1)}`             | Event handler; wrap in arrow function |
 
 ### State and when to use it
 
@@ -148,9 +148,15 @@ if (error) return <p>Error: {error}</p>;
 return <div>{/* actual content */}</div>;
 
 // Or inline:
-{loading && <Spinner />}
-{movies.length === 0 && <p>No results</p>}
-{movies.map(m => <Card key={m.id} movie={m} />)}
+{
+  loading && <Spinner />;
+}
+{
+  movies.length === 0 && <p>No results</p>;
+}
+{
+  movies.map((m) => <Card key={m.id} movie={m} />);
+}
 ```
 
 ### Passing data down, calling parents up
@@ -224,15 +230,20 @@ In the CSS file:
 
 React turns `styles.card` into something like `MovieCard_card_abc123`, so it won't conflict with other `.card` classes.
 
-### CSS variables (this project)
+### CSS variables and theme (this project)
 
 Shared values live in `styles/`:
 
 ```css
-/* colors.css */
---color-bg: #1a1a1a;
---color-text: #f5f5f5;
---color-primary: #e50914;
+/* colors.css*/
+--color-primary: #a60f2d; /* Crimson */
+--color-bg: #1f1f1f; /* Dark background */
+--color-bg-elevated: #2d2d2d; /* Navbar, modals */
+--color-surface: #4d4d4d; /* Cards, inputs */
+--color-text: #ebebeb; /* Primary text */
+--color-text-muted: #808080; /* Placeholders */
+--color-border: #4d4d4d; /* Borders */
+--color-accent: #ca1237; /* Links, buttons */
 
 /* spacing.css */
 --spacing-sm: 8px;
@@ -240,12 +251,13 @@ Shared values live in `styles/`:
 --spacing-lg: 24px;
 ```
 
-Use them:
+Use semantic variables so components adapt to light/dark mode:
 
 ```css
 .myBox {
   padding: var(--spacing-md);
   color: var(--color-text);
+  background-color: var(--color-surface);
 }
 ```
 

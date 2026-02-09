@@ -1,5 +1,64 @@
-:root {
-  --color-bg: #1a1a1a;
-  --color-text: #f5f5f5;
-  --color-primary: #e50914;
+/**
+ * WSU (Washington State University) color palette.
+ * Core: Crimson #A60F2D, Gray #4D4D4D, White #FFFFFF
+ * Secondary: Red #CA1237, Black #000000
+ * Accent: Pacific Sky #5BC3F5, Midnight #002D61, etc.
+ *
+ * Usage: Set data-theme="dark" or data-theme="light" on <html>.
+ */
+:root,
+[data-theme="dark"] {
+  /* WSU Core */
+  --color-primary: #A60F2D;
+  --color-primary-rgb: 166, 15, 45;
+  --color-crimson: #A60F2D;
+  --color-gray: #4D4D4D;
+  --color-white: #FFFFFF;
+
+  /* Backgrounds — dark grays from WSU palette */
+  --color-bg: #1F1F1F;
+  --color-bg-elevated: #2d2d2d;
+  --color-surface: #4D4D4D;
+  --color-surface-hover: #5c5c5c;
+
+  /* Text */
+  --color-text: #EBEBEB;
+  --color-text-secondary: rgba(235, 235, 235, 0.85);
+  --color-text-muted: #808080;
+
+  /* Borders & dividers */
+  --color-border: #4D4D4D;
+  --color-border-subtle: rgba(77, 77, 77, 0.5);
+
+  /* Accent — Crimson for links, buttons */
+  --color-accent: #CA1237;
+  --color-accent-hover: #A60F2D;
+}
+
+[data-theme="light"] {
+  /* WSU Core */
+  --color-primary: #A60F2D;
+  --color-primary-rgb: 166, 15, 45;
+  --color-crimson: #A60F2D;
+  --color-gray: #4D4D4D;
+  --color-white: #FFFFFF;
+
+  /* Backgrounds */
+  --color-bg: #FFFFFF;
+  --color-bg-elevated: #EBEBEB;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #EBEBEB;
+
+  /* Text */
+  --color-text: #1F1F1F;
+  --color-text-secondary: rgba(31, 31, 31, 0.85);
+  --color-text-muted: #4D4D4D;
+
+  /* Borders & dividers */
+  --color-border: #CCCCCC;
+  --color-border-subtle: rgba(204, 204, 204, 0.8);
+
+  /* Accent */
+  --color-accent: #A60F2D;
+  --color-accent-hover: #CA1237;
 }
