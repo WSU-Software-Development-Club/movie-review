@@ -1,9 +1,9 @@
 /**
  * API client for movie endpoints.
- * Calls the backend at /api/movies.
+ * Calls the backend at /movies.
  */
 
-const API_BASE = "http://localhost:3001/api";
+import { API_BASE } from "./config.js";
 
 /**
  * Fetches popular movies for the home page.
