@@ -4,7 +4,6 @@
  */
 
 const config = require("../config");
-const TMDB_BASE = config.urls.TMDB_BASE;
 
 /**
  * GET /api/movies - Returns popular movies for the home page.
