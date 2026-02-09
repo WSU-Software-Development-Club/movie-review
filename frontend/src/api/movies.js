@@ -21,7 +21,18 @@ export async function fetchPopularMovies() {
  */
 export async function fetchMovieById(id) {
   // TODO: GET ${API_BASE}/movies/${id} and return the movie object from the response
-  return null;
+  try{
+    const url=`${API_BASE}/movies/${id}`;
+    const response=await fetch(url);
+
+    const data =await response.json();
+
+    return data.movie;
+  }
+  catch(error){
+    console.log("Error fetching movie by ID :" ,error);
+    return null ;
+  }
 }
 
 /**
