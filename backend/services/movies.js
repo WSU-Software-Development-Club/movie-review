@@ -9,8 +9,15 @@ const config = require("../config");
  * GET /api/movies - Returns popular movies for the home page.
  */
 async function getPopularMovies(req, res) {
-  // res.json({ movies: response.results })
-  res.json({ movies: [] });
+  try {
+    const url = config.url("movie/popular", { api_key: config.env.TMDB_API_KEY });
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json({ movies: data.results });
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    res.status(500).json({ error: "Failed to fetch popular movies" });
+  }
 }
 
 /**
