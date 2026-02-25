@@ -11,7 +11,7 @@ import { API_BASE } from "./config.js";
  */
 export async function fetchPopularMovies() {
   // TODO: GET ${API_BASE}/movies and return the movies array from the response
-  return [];
+  //return [];
   fetch(`${API_BASE}/movies`)
     .then(response => response.json())
     .then(data => {
@@ -21,14 +21,6 @@ export async function fetchPopularMovies() {
       console.error("Error fetching popular movies:", error);
       return [];
     });
-
-    
-
-
-
-
-
-
 }
 
 /**
