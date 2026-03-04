@@ -10,7 +10,9 @@ const config = require("../config");
  */
 async function getPopularMovies(req, res) {
   try {
-    const url = config.url("movie/popular", { api_key: config.env.TMDB_API_KEY });
+    const url = config.url("movie/popular", {
+      api_key: config.env.TMDB_API_KEY,
+    });
     const response = await fetch(url);
     const data = await response.json();
     res.json({ movies: data.results });
@@ -24,16 +26,23 @@ async function getPopularMovies(req, res) {
  * GET /api/movies/search?q=query - Returns movies matching the search query.
  */
 async function searchMovies(req, res) {
-  // Use req.query.q for the search term
-  // res.json({ movies: response.results })
-  try{
-    const url = config.url("search/movie", {api_key: config.env.TMDB_API_KEY, query: req.query.q,});
-    const response = await fetch(url)
-    const data = await response.json()
-    res.json({ movies: [] });
-  } catch(error){
-    res.status(400).json({ error: "Search query required" })
-    res.status(500).json({ error: "Failed to search movies" })
+  try {
+    const query = req.query.q;
+
+    if (!query) {
+      return res.status(400).json({ error: "Search query 'q' is required" });
+    }
+
+    const url = config.url(`search/movie`, {
+      api_key: config.env.TMDB_API_KEY,
+      query: query.trim(),
+    });
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json({ movies: data.results });
+  } catch (error) {
+    console.error("Error searching movies:", error);
+    res.status(500).json({ error: "Failed to search movies", message: error });
   }
 }
 
