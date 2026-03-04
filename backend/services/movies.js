@@ -5,14 +5,15 @@
 
 const config = require("../config");
 
+const TMDB_BASE = config.urls.TMDB_BASE;
+const TMDB_API_KEY = config.env.TMDB_API_KEY;
+
 /**
  * GET /api/movies - Returns popular movies for the home page.
  */
 async function getPopularMovies(req, res) {
   try {
-    const url = config.url("movie/popular", {
-      api_key: config.env.TMDB_API_KEY,
-    });
+    const url = `${TMDB_BASE}/movie/popular?api_key=${TMDB_API_KEY}`;
     const response = await fetch(url);
     const data = await response.json();
     res.json({ movies: data.results });
@@ -33,16 +34,14 @@ async function searchMovies(req, res) {
       return res.status(400).json({ error: "Search query 'q' is required" });
     }
 
-    const url = config.url(`search/movie`, {
-      api_key: config.env.TMDB_API_KEY,
-      query: query.trim(),
-    });
+    const encodedQuery = encodeURIComponent(query.trim());
+    const url = `${TMDB_BASE}/search/movie?api_key=${TMDB_API_KEY}&query=${encodedQuery}`;
     const response = await fetch(url);
     const data = await response.json();
     res.json({ movies: data.results });
   } catch (error) {
     console.error("Error searching movies:", error);
-    res.status(500).json({ error: "Failed to search movies", message: error });
+    res.status(500).json({ error: error });
   }
 }
 
