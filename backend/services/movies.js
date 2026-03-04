@@ -19,7 +19,15 @@ async function getPopularMovies(req, res) {
 async function searchMovies(req, res) {
   // Use req.query.q for the search term
   // res.json({ movies: response.results })
-  res.json({ movies: [] });
+  try{
+    const url = config.url("search/movie", {api_key: config.env.TMDB_API_KEY, query: req.query.q,});
+    const response = await fetch(url)
+    const data = await response.json()
+    res.json({ movies: [] });
+  } catch(error){
+    res.status(400).json({ error: "Search query required" })
+    res.status(500).json({ error: "Failed to search movies" })
+  }
 }
 
 /**
