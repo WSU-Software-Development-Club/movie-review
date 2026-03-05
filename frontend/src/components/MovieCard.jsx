@@ -1,8 +1,9 @@
 /**
- * Reusable movie card component.
+ * Reusable movie card component. Wrapped in Link so clicking goes to movie detail.
  * @param {object} movie - Movie object. TMDB format: { id, title, poster_path, release_date }
  * Poster URL: https://image.tmdb.org/t/p/w500${movie.poster_path}
  */
+import { Link } from "react-router-dom";
 import styles from "./MovieCard.module.css";
 
 const MovieCard = ({ movie }) => {
@@ -14,7 +15,7 @@ const MovieCard = ({ movie }) => {
     : null;
 
   return (
-    <div className={styles.card}>
+    <Link to={`/movie/${movie.id}`} className={styles.card}>
       {posterUrl ? (
         <img src={posterUrl} alt={movie.title} className={styles.poster} />
       ) : (
@@ -22,7 +23,7 @@ const MovieCard = ({ movie }) => {
       )}
       <p className={styles.title}>{movie.title}</p>
       {year && <p className={styles.year}>{year}</p>}
-    </div>
+    </Link>
   );
 };
 

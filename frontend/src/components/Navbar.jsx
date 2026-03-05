@@ -1,5 +1,5 @@
 /**
- * Navbar — outline only. TODO: Polish links, add auth, search, etc.
+ * Navbar — guided outline. Add search input or link to /search.
  */
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
@@ -17,6 +17,12 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/profile">Profile</Link>
+          </li>
+          <li>
+            <Link to="/login">Log in</Link>
+          </li>
+          <li>
+            <Link to="/signup">Sign up</Link>
           </li>
         </ul>
       </div>

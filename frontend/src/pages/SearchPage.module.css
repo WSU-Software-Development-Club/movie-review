@@ -38,9 +38,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
-}
-
-.searchSection {
-  margin-top: var(--spacing-lg);
 }

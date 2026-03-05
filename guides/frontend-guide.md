@@ -84,6 +84,20 @@ const MovieCard = ({ movie }) => {
 | `className={styles.card}`                          | Use `className`, not `class`          |
 | `onClick={() => setCount(c => c + 1)}`             | Event handler; wrap in arrow function |
 
+### Array .map()
+
+**`.map()`** loops over an array and returns a new array. You give it a function; that function runs once per item, and its return value becomes that element in the new array. In React we use it to render one component per item:
+
+```javascript
+{movies.map((movie) => (
+  <MovieCard key={movie.id} movie={movie} />
+))}
+```
+
+- `movies.map(...)` — for each movie in `movies`, run the arrow function.
+- The function receives one `movie` and returns one `<MovieCard />`.
+- React ends up with a list of components to render. The **`key`** prop must be unique per item (e.g. `movie.id`) so React can track which item changed.
+
 ### State and when to use it
 
 **State** = data that changes. When you call the setter, React re-renders.

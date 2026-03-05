@@ -38,3 +38,45 @@
   border: 1px dashed var(--color-border);
   border-radius: var(--spacing-xs);
 }
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.avatarPlaceholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+}
+
+.userName {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+}
+
+.reviewList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reviewList li {
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewList a {
+  color: var(--color-accent);
+  font-size: var(--font-size-small);
+  margin-bottom: var(--spacing-xs);
+  display: inline-block;
+}

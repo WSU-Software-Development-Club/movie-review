@@ -10,17 +10,14 @@ import { API_BASE } from "./config.js";
  * @returns {Promise<Array>} Array of movie objects
  */
 export async function fetchPopularMovies() {
-  // TODO: GET ${API_BASE}/movies and return the movies array from the response
-  //return [];
-  fetch(`${API_BASE}/movies`)
-    .then(response => response.json())
-    .then(data => {
-      return data.movies;
-    })
-    .catch(error => {
-      console.error("Error fetching popular movies:", error);
-      return [];
-    });
+  try {
+    const response = await fetch(`${API_BASE}/movies`);
+    const data = await response.json();
+    return data.movies ?? [];
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    return [];
+  }
 }
 
 /**
@@ -29,27 +26,26 @@ export async function fetchPopularMovies() {
  * @returns {Promise<object|null>} Movie object or null
  */
 export async function fetchMovieById(id) {
-  // TODO: GET ${API_BASE}/movies/${id} and return the movie object from the response
-  try{
+  try {
     const url=`${API_BASE}/movies/${id}`;
     const response=await fetch(url);
 
     const data =await response.json();
 
     return data.movie;
-  }
-  catch(error){
-    console.log("Error fetching movie by ID :" ,error);
-    return null ;
+  } catch (error) {
+    console.error("Error fetching movie by ID:", error);
+    return null;
   }
 }
 
 /**
  * Searches for movies by query string.
+ * TODO: GET ${API_BASE}/movies/search?q=${encodeURIComponent(query)} and return data.movies
  * @param {string} query - Search term
  * @returns {Promise<Array>} Array of movie objects
  */
 export async function searchMovies(query) {
-  // TODO: GET ${API_BASE}/movies/search?q=${encodeURIComponent(query)} and return the movies array
+  if (!query?.trim()) return [];
   return [];
 }
