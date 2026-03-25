@@ -50,8 +50,19 @@ export async function fetchMovieById(id) {
  */
 
 export async function searchMovies(query) {
-  
-  if (!query?.trim()) return[]
-  return []; 
+  if (!query?.trim()) return [];
+  try
+  {
+    const url = `${API_BASE}/movies/search?q=${encodeURIComponent(query)}`;
+    const response = await fetch(url);
+    const data = await response.json();
 
+    return data.movies;
+  }
+  catch (error)
+  {
+    console.error("Error fetching movie by Query: ", error);
+    return [];
+  }
+  
 }

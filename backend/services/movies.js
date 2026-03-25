@@ -50,7 +50,19 @@ async function searchMovies(req, res) {
  */
 async function getMovieById(req, res) {
   // res.json({ movie: data }) or res.json({ movie: null }) on error
-  res.json({ movie: null });
+  
+  try{
+    const url = `${config.urls.TMDB_BASE}/movie/${req.params.id}?api_key=${config.env.TMDB_API_KEY}`;
+    const response = await fetch(url);
+    if(!response.ok)
+    {
+      return res.status(404).json({ movie: null });
+    }
+    const data = await response.json();
+    res.json({ movie: data });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch movie" , movie: null})
+  }
 }
 
 module.exports = {
