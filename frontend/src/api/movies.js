@@ -12,8 +12,11 @@ import { API_BASE } from "./config.js";
 export async function fetchPopularMovies() {
   try {
     const response = await fetch(`${API_BASE}/movies`);
+
     const data = await response.json();
+
     return data.movies ?? [];
+
   } catch (error) {
     console.error("Error fetching popular movies:", error);
     return [];
@@ -45,6 +48,7 @@ export async function fetchMovieById(id) {
  * @param {string} query - Search term
  * @returns {Promise<Array>} Array of movie objects
  */
+
 export async function searchMovies(query) {
   if (!query?.trim()) return [];
   try
