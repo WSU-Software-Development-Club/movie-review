@@ -12,6 +12,19 @@
   align-items: center;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
 .logo {
   font-size: var(--font-size-heading);
   font-weight: bold;

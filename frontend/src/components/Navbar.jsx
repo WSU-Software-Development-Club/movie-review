@@ -8,9 +8,34 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        <Link to="/" className={styles.logo}>
-          Movie Review
-        </Link>
+        <div className={styles.brand}>
+          <img 
+            src="https://placehold.co/40x40/png" 
+            alt="Logo" 
+            className={styles.image} 
+          />
+          <Link to="/" className={styles.logo}>
+            Movie Review
+          </Link>
+
+
+
+          <ul className={styles.links}>
+            <li>
+             <Link to="/">Popular</Link>
+            </li>
+            <li>
+             <Link to="/">Trending</Link>
+            </li>
+            <li>
+             <Link to="/">Movies</Link>
+            </li>
+            <li>
+             <Link to="/">TV Shows</Link>
+            </li>
+          </ul>
+
+        </div>
         <ul className={styles.links}>
           <li>
             <Link to="/">Home</Link>
