@@ -9,6 +9,10 @@ import {
 } from "../api/movies.js";
 import { fetchHomeReviews } from "../api/reviews.js";
 import { tmdbPosterUrl } from "../utils/tmdbPosterUrl.js";
+import {
+  formatReleaseYear,
+  formatRuntimeMinutes,
+} from "../utils/movieDisplay.js";
 import HomeHero from "../components/home/HomeHero.jsx";
 import MovieCarouselSection from "../components/home/MovieCarouselSection.jsx";
 import HomeReviewCard from "../components/home/HomeReviewCard.jsx";
@@ -24,28 +28,6 @@ function pickRandomMovie(list) {
   return list[index];
 }
 
-function formatYear(releaseDate) {
-  if (!releaseDate) return null;
-  const y = new Date(releaseDate).getFullYear();
-  return Number.isFinite(y) ? String(y) : null;
-}
-
-/**
- * @param {number|null|undefined} minutes
- * @returns {string|null}
- */
-function formatRuntime(minutes) {
-  if (minutes == null || minutes < 1 || Number.isNaN(Number(minutes))) {
-    return null;
-  }
-  const m = Math.round(Number(minutes));
-  const h = Math.floor(m / 60);
-  const rest = m % 60;
-  if (h === 0) return `${rest}m`;
-  if (rest === 0) return `${h}h`;
-  return `${h}h ${rest}m`;
-}
-
 /**
  * @param {object|null|undefined} detail - TMDB movie detail
  * @param {object|null|undefined} listItem - list row fallback
@@ -53,12 +35,13 @@ function formatRuntime(minutes) {
  */
 function buildFeaturedMeta(detail, listItem) {
   const year =
-    formatYear(detail?.release_date) ?? formatYear(listItem?.release_date);
+    formatReleaseYear(detail?.release_date) ??
+    formatReleaseYear(listItem?.release_date);
   const genres =
     detail?.genres?.length > 0
       ? detail.genres.map((g) => g.name).filter(Boolean)
       : [];
-  const runtime = formatRuntime(detail?.runtime);
+  const runtime = formatRuntimeMinutes(detail?.runtime);
   return {
     genres,
     year: year ?? null,
@@ -145,14 +128,29 @@ const HomePage = () => {
   }, [featuredMovie?.id]);
 
   useEffect(() => {
+    let cancelled = false;
     fetchHomeReviews()
-      .then((data) => setReviews(Array.isArray(data) ? data : []))
-      .catch(() => setReviews([]));
+      .then((data) => {
+        if (!cancelled) setReviews(Array.isArray(data) ? data : []);
+      })
+      .catch(() => {
+        if (!cancelled) setReviews([]);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const featuredMeta = buildFeaturedMeta(featuredDetail, featuredMovie);
   const featuredOverview =
     featuredDetail?.overview?.trim() || featuredMovie?.overview?.trim() || "";
+
+  const carouselSections = [
+    { sectionId: "now-playing", title: "Now Playing", movies: nowPlaying },
+    { sectionId: "popular", title: "Popular", movies: popular },
+    { sectionId: "top-rated", title: "Top Rated", movies: topRated },
+    { sectionId: "upcoming", title: "Upcoming", movies: upcoming },
+  ];
 
   return (
     <div className={styles.page}>
@@ -168,30 +166,15 @@ const HomePage = () => {
       />
 
       <div className={styles.carousels}>
-        <MovieCarouselSection
-          title="Now Playing"
-          sectionId="now-playing"
-          movies={nowPlaying}
-          loading={loading}
-        />
-        <MovieCarouselSection
-          title="Popular"
-          sectionId="popular"
-          movies={popular}
-          loading={loading}
-        />
-        <MovieCarouselSection
-          title="Top Rated"
-          sectionId="top-rated"
-          movies={topRated}
-          loading={loading}
-        />
-        <MovieCarouselSection
-          title="Upcoming"
-          sectionId="upcoming"
-          movies={upcoming}
-          loading={loading}
-        />
+        {carouselSections.map(({ sectionId, title, movies }) => (
+          <MovieCarouselSection
+            key={sectionId}
+            title={title}
+            sectionId={sectionId}
+            movies={movies}
+            loading={loading}
+          />
+        ))}
       </div>
 
       <section

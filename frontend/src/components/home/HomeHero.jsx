@@ -1,23 +1,17 @@
 import { Link } from "react-router-dom";
 import { tmdbPosterUrl, tmdbBackdropUrl } from "../../utils/tmdbPosterUrl.js";
+import { formatRatingDisplay } from "../../utils/movieDisplay.js";
 import styles from "./HomeHero.module.css";
 
 /**
  * @param {object|null|undefined} featuredMovie - Featured list item (poster fills the hero backdrop)
  * @param {boolean} loading - Initial home lists loading
- * @param {string|number|null|undefined} featuredDbRating - App/DB score when available
+ * @param {string|number|null|undefined} featuredDbRating - App/DB score when backend supports it
  * @param {{ genres?: string[], year?: string|null, runtime?: string|null }} featuredMeta - From movie detail API
  * @param {boolean} featuredMetaLoading - Detail fetch in flight (genres / runtime)
  * @param {string} [featuredOverview] - Prefer TMDB detail overview when loaded
  * @param {string|null|undefined} featuredBackdropPath - TMDB widescreen backdrop_path (detail or list)
  */
-
-function formatDbRating(value) {
-  if (value == null || value === "") return null;
-  const n = Number(value);
-  if (!Number.isNaN(n)) return Number.isInteger(n) ? String(n) : n.toFixed(1);
-  return String(value);
-}
 
 const HomeHero = ({
   featuredMovie = null,
@@ -41,10 +35,9 @@ const HomeHero = ({
   const backdropUrl = widescreenUrl ?? posterOnlyUrl;
   const usePortraitPoster = !widescreenUrl && Boolean(posterOnlyUrl);
 
-  const scoreDisplay = loading ? null : formatDbRating(featuredDbRating);
-  const scoreText = scoreDisplay ?? "N/A";
+  const scoreText = formatRatingDisplay(featuredDbRating);
   const scoreAriaLabel =
-    scoreDisplay != null ? `Score ${scoreDisplay}` : "Score not available yet";
+    scoreText === "N/A" ? "Score not available yet" : `Score ${scoreText}`;
 
   const showInitialMetaSkeleton = loading;
   const showPartialMetaSkeleton =

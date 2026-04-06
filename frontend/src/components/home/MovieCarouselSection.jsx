@@ -1,29 +1,11 @@
 import { Link } from "react-router-dom";
 import { tmdbPosterUrl } from "../../utils/tmdbPosterUrl.js";
+import {
+  formatReleaseYear,
+  formatMovieListRating,
+  ratingDisplayAriaLabel,
+} from "../../utils/movieDisplay.js";
 import styles from "./MovieCarouselSection.module.css";
-
-function formatYear(releaseDate) {
-  if (!releaseDate) return null;
-  const y = new Date(releaseDate).getFullYear();
-  return Number.isFinite(y) ? String(y) : null;
-}
-
-/**
- * App / DB rating only — not TMDB vote_average.
- * @param {object} movie
- * @returns {string}
- */
-function formatCardRating(movie) {
-  const raw =
-    movie?.userRating ??
-    movie?.db_rating ??
-    movie?.app_rating ??
-    movie?.rating;
-  if (raw == null || raw === "") return "N/A";
-  const n = Number(raw);
-  if (!Number.isNaN(n)) return Number.isInteger(n) ? String(n) : n.toFixed(1);
-  return String(raw);
-}
 
 /**
  * Horizontal scroll row of movie posters (TMDB list item shape).
@@ -64,8 +46,8 @@ const MovieCarouselSection = ({
         <ul className={styles.scroller}>
           {movies.map((movie) => {
             const posterUrl = tmdbPosterUrl(movie.poster_path, "w342");
-            const year = formatYear(movie.release_date);
-            const ratingText = formatCardRating(movie);
+            const year = formatReleaseYear(movie.release_date);
+            const ratingText = formatMovieListRating(movie);
             return (
               <li key={movie.id} className={styles.listItem}>
                 <Link to={`/movie/${movie.id}`} className={styles.card}>
@@ -83,11 +65,7 @@ const MovieCarouselSection = ({
                       <div className={styles.ratingOverlay}>
                         <span
                           className={styles.ratingValue}
-                          aria-label={
-                            ratingText === "N/A"
-                              ? "Rating not available yet"
-                              : `Rating ${ratingText}`
-                          }
+                          aria-label={ratingDisplayAriaLabel(ratingText)}
                         >
                           {ratingText}
                         </span>
