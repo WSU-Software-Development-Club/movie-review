@@ -4,7 +4,7 @@
 
 .container {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--layout-max-width-wide);
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
   display: flex;

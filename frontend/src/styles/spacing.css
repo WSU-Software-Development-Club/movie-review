@@ -5,4 +5,5 @@
   --spacing-lg: 24px;
   --poster-min-width: 160px;
   --content-max-width: 900px;
+  --layout-max-width-wide: 1600px;
 }

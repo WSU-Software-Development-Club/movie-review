@@ -5,21 +5,47 @@
 
 import { API_BASE } from "./config.js";
 
-/**
- * Fetches popular movies for the home page.
- * @returns {Promise<Array>} Array of movie objects
- */
-export async function fetchPopularMovies() {
+async function fetchMovieList(path) {
   try {
-    const response = await fetch(`${API_BASE}/movies/popular`);
-
-    const data = await response.json();
-
+    const response = await fetch(`${API_BASE}/movies/${path}`);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      console.error(`/movies/${path}:`, data.error ?? response.status);
+      return data.movies ?? [];
+    }
     return data.movies ?? [];
   } catch (error) {
-    console.error("Error fetching popular movies:", error);
+    console.error(`Error fetching /movies/${path}:`, error);
     return [];
   }
+}
+
+/**
+ * @returns {Promise<Array>}
+ */
+export async function fetchNowPlayingMovies() {
+  return fetchMovieList("now_playing");
+}
+
+/**
+ * @returns {Promise<Array>}
+ */
+export async function fetchPopularMovies() {
+  return fetchMovieList("popular");
+}
+
+/**
+ * @returns {Promise<Array>}
+ */
+export async function fetchTopRatedMovies() {
+  return fetchMovieList("top_rated");
+}
+
+/**
+ * @returns {Promise<Array>}
+ */
+export async function fetchUpcomingMovies() {
+  return fetchMovieList("upcoming");
 }
 
 /**
@@ -43,11 +69,9 @@ export async function fetchMovieById(id) {
 
 /**
  * Searches for movies by query string.
- * TODO: GET ${API_BASE}/movies/search?q=${encodeURIComponent(query)} and return data.movies
  * @param {string} query - Search term
  * @returns {Promise<Array>} Array of movie objects
  */
-
 export async function searchMovies(query) {
   if (!query?.trim()) return [];
   try {
