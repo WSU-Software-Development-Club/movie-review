@@ -96,7 +96,19 @@ The app uses [The Movie Database (TMDB)](https://www.themoviedb.org/) for movie 
 
 ---
 
-## 7. Postman (for testing the API)
+## 7. Supabase (optional)
+
+The app can use [Supabase](https://supabase.com/) for auth, database, and other backend services. Values are loaded with **dotenv** on the backend only (see `backend/config.js`). The React app talks to Supabase through your API, not with Supabase credentials in the browser.
+
+Copy `backend/.env.example` to `backend/.env` and set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` as needed. Keep the service role key on the server only.
+
+Restart Docker container after changing env files.
+
+**Project access:** If you need access to the club’s Supabase project itself, ask in the **movie-review-general** channel in the club Discord.
+
+---
+
+## 8. Postman (for testing the API)
 
 [Postman](https://www.postman.com/downloads/) lets you send requests to your backend API without using the frontend.
 
