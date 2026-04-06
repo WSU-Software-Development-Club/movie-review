@@ -1,6 +1,6 @@
 /**
  * API client for movie endpoints.
- * Calls the backend at /movies.
+ * Calls the backend at /movies/*.
  */
 
 import { API_BASE } from "./config.js";
@@ -11,12 +11,11 @@ import { API_BASE } from "./config.js";
  */
 export async function fetchPopularMovies() {
   try {
-    const response = await fetch(`${API_BASE}/movies`);
+    const response = await fetch(`${API_BASE}/movies/popular`);
 
     const data = await response.json();
 
     return data.movies ?? [];
-
   } catch (error) {
     console.error("Error fetching popular movies:", error);
     return [];
@@ -30,10 +29,10 @@ export async function fetchPopularMovies() {
  */
 export async function fetchMovieById(id) {
   try {
-    const url=`${API_BASE}/movies/${id}`;
-    const response=await fetch(url);
+    const url = `${API_BASE}/movies/${id}`;
+    const response = await fetch(url);
 
-    const data =await response.json();
+    const data = await response.json();
 
     return data.movie;
   } catch (error) {
@@ -51,18 +50,14 @@ export async function fetchMovieById(id) {
 
 export async function searchMovies(query) {
   if (!query?.trim()) return [];
-  try
-  {
+  try {
     const url = `${API_BASE}/movies/search?q=${encodeURIComponent(query)}`;
     const response = await fetch(url);
     const data = await response.json();
 
     return data.movies;
-  }
-  catch (error)
-  {
+  } catch (error) {
     console.error("Error fetching movie by Query: ", error);
     return [];
   }
-  
 }

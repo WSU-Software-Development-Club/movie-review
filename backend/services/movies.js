@@ -9,7 +9,7 @@ const TMDB_BASE = config.urls.TMDB_BASE;
 const TMDB_API_KEY = config.env.TMDB_API_KEY;
 
 /**
- * GET /api/movies - Returns popular movies for the home page.
+ * GET /movies/popular - Returns popular movies for the home page.
  */
 async function getPopularMovies(req, res) {
   try {
@@ -24,7 +24,7 @@ async function getPopularMovies(req, res) {
 }
 
 /**
- * GET /api/movies/search?q=query - Returns movies matching the search query.
+ * GET /movies/search?q=query - Returns movies matching the search query.
  */
 async function searchMovies(req, res) {
   try {
@@ -46,22 +46,21 @@ async function searchMovies(req, res) {
 }
 
 /**
- * GET /api/movies/:id - Returns a single movie by ID.
+ * GET /movies/:id - Returns a single movie by ID.
  */
 async function getMovieById(req, res) {
   // res.json({ movie: data }) or res.json({ movie: null }) on error
-  
-  try{
+
+  try {
     const url = `${config.urls.TMDB_BASE}/movie/${req.params.id}?api_key=${config.env.TMDB_API_KEY}`;
     const response = await fetch(url);
-    if(!response.ok)
-    {
+    if (!response.ok) {
       return res.status(404).json({ movie: null });
     }
     const data = await response.json();
     res.json({ movie: data });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch movie" , movie: null})
+    res.status(500).json({ error: "Failed to fetch movie", movie: null });
   }
 }
 

@@ -6,7 +6,7 @@ const {
   getMovieById,
 } = require("../services/movies");
 
-router.get("/", getPopularMovies);
+router.get("/popular", getPopularMovies);
 router.get("/search", searchMovies);
 router.get("/:id", getMovieById);
 
