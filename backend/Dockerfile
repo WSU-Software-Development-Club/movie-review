@@ -9,6 +9,7 @@ COPY config.js ./
 COPY index.js ./
 COPY database ./database/
 COPY auth ./auth/
+COPY util ./util/
 COPY routes ./routes/
 COPY services ./services/
 
