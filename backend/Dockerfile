@@ -5,8 +5,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --omit=dev
 
+COPY config.js ./
 COPY index.js ./
+COPY database ./database/
+COPY auth ./auth/
 COPY routes ./routes/
+COPY services ./services/
 
 EXPOSE 3001
 
