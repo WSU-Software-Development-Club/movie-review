@@ -1,15 +1,6 @@
 const { getSupabaseClient } = require("../database/supabaseClient");
 const { validatePassword } = require("../util/helpers");
 
-async function authSignUp({ email, password, userMetadata = {} }) {
-  const supabase = getSupabaseClient();
-  return supabase.auth.signUp({
-    email,
-    password,
-    options: { data: userMetadata },
-  });
-}
-
 async function signup(req, res) {
   try {
     const { email, password, data: userMetadata } = req.body;
@@ -22,11 +13,14 @@ async function signup(req, res) {
       return res.status(400).json({ error: passwordCheck.error });
     }
 
-    const { data, error } = await authSignUp({
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      userMetadata:
-        userMetadata && typeof userMetadata === "object" ? userMetadata : {},
+      options: {
+        data:
+          userMetadata && typeof userMetadata === "object" ? userMetadata : {},
+      },
     });
 
     if (error) {
